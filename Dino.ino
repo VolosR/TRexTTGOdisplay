@@ -64,7 +64,9 @@ void setup() {
   pinMode(btnBrightness, INPUT_PULLUP);
   attachInterrupt(btnBrightness, brightness_ISR, FALLING);
   tft.init();
-  tft.setRotation(1);
+  #ifdef TFT_ROTATE // I Set this variable in the TFT_eSPI User Setup   (Setup136_LilyGo_TTV requires a screen rotation)
+    tft.setRotation(TFT_ROTATE);
+  #endif
   tft.setSwapBytes(true);
   tft.fillScreen(TFT_WHITE);
   ledcSetup(pwmLedChannelTFT, pwmFreq, pwmResolution);
